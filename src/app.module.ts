@@ -1,16 +1,17 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { RolesModule } from './roles/roles.module';
-import { ArticleModule } from './article/article.module';
-import { ArticleGroupModule } from './article-group/article-group.module';
-import { ArticleTagModule } from './article-tag/article-tag.module';
-import { ArticleCommentModule } from './article-comment/article-comment.module';
-import { ArticleThumbModule } from './article-thumb/article-thumb.module';
-import { DraftModule } from './draft/draft.module';
+import { UserModule } from './modules/user/user.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { ArticleModule } from './modules/article/article.module';
+import { ArticleGroupModule } from './modules/article-group/article-group.module';
+import { ArticleTagModule } from './modules/article-tag/article-tag.module';
+import { ArticleCommentModule } from './modules/article-comment/article-comment.module';
+import { ArticleThumbModule } from './modules/article-thumb/article-thumb.module';
+import { DraftModule } from './modules/draft/draft.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 @Module({
   imports: [
@@ -37,8 +38,13 @@ import { Connection } from 'typeorm';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { 
+export class AppModule implements NestModule {
   constructor(
     private connection: Connection
-  ){}
+  ) { }
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(
+      LoggerMiddleware
+    ).forRoutes({ path: '/', method: RequestMethod.ALL })
+  }
 }
