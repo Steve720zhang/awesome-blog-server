@@ -19,7 +19,9 @@ export class ArticleController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.articleService.findOne(+id);
+    const res = this.articleService.findOne(+id);
+    console.log(res)
+    return res;
   }
 
   @Patch(':id')

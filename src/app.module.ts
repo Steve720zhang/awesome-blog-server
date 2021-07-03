@@ -10,6 +10,7 @@ import { ArticleCommentModule } from './article-comment/article-comment.module';
 import { ArticleThumbModule } from './article-thumb/article-thumb.module';
 import { DraftModule } from './draft/draft.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Connection } from 'typeorm';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.DB_SCHEMA,
       entities: [],
       synchronize: true,
+      autoLoadEntities: true,
     }),
     UserModule,
     RolesModule,
@@ -35,4 +37,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(
+    private connection: Connection
+  ){}
+}
