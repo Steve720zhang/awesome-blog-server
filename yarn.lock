@@ -620,10 +620,10 @@
   resolved "https://registry.npmjs.org/@nestjs/mapped-types/-/mapped-types-0.4.1.tgz"
   integrity sha512-JXrw2LMangSU3vnaXWXVX47GRG1FbbNh4aVBbidDjxT3zlghsoNQY6qyWtT001MCl8lJGo8I6i6+DurBRRxl/Q==
 
-"@nestjs/passport@^7.1.5":
-  version "7.1.5"
-  resolved "https://registry.npm.taobao.org/@nestjs/passport/download/@nestjs/passport-7.1.5.tgz"
-  integrity sha1-sy/ASSAI1z665DJ/vAASpzioNmQ=
+"@nestjs/passport@^7.1.6":
+  version "7.1.6"
+  resolved "https://registry.nlark.com/@nestjs/passport/download/@nestjs/passport-7.1.6.tgz#608bb265dfd85602aa74bbceacc012ffb2e9d25d"
+  integrity sha1-YIuyZd/YVgKqdLvOrMAS/7Lp0l0=
 
 "@nestjs/platform-express@^7.6.15":
   version "7.6.18"
@@ -812,7 +812,7 @@
     "@types/qs" "*"
     "@types/range-parser" "*"
 
-"@types/express@^4.17.11":
+"@types/express@*", "@types/express@^4.17.11":
   version "4.17.12"
   resolved "https://registry.npmjs.org/@types/express/-/express-4.17.12.tgz"
   integrity sha512-pTYas6FrP15B1Oa0bkN5tQMNqOcVXa9j4FTFtO8DWI9kppKib+6NJtfTOOLcwxuuYvcX2+dVG6et1SxW/Kc17Q==
@@ -890,6 +890,30 @@
   version "4.0.0"
   resolved "https://registry.npmjs.org/@types/parse-json/-/parse-json-4.0.0.tgz"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
+
+"@types/passport-local@^1.0.33":
+  version "1.0.33"
+  resolved "https://registry.nlark.com/@types/passport-local/download/@types/passport-local-1.0.33.tgz#d245b60c5b801cb3aeca1ffab557d5fe1534260d"
+  integrity sha1-0kW2DFuAHLOuyh/6tVfV/hU0Jg0=
+  dependencies:
+    "@types/express" "*"
+    "@types/passport" "*"
+    "@types/passport-strategy" "*"
+
+"@types/passport-strategy@*":
+  version "0.2.35"
+  resolved "https://registry.nlark.com/@types/passport-strategy/download/@types/passport-strategy-0.2.35.tgz?cache=0&sync_timestamp=1621242748422&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fpassport-strategy%2Fdownload%2F%40types%2Fpassport-strategy-0.2.35.tgz#e52f5212279ea73f02d9b06af67efe9cefce2d0c"
+  integrity sha1-5S9SEieepz8C2bBq9n7+nO/OLQw=
+  dependencies:
+    "@types/express" "*"
+    "@types/passport" "*"
+
+"@types/passport@*":
+  version "1.0.6"
+  resolved "https://registry.nlark.com/@types/passport/download/@types/passport-1.0.6.tgz?cache=0&sync_timestamp=1621242728363&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fpassport%2Fdownload%2F%40types%2Fpassport-1.0.6.tgz#72343e49d65efa98cb328163cff5f127981947d7"
+  integrity sha1-cjQ+SdZe+pjLMoFjz/XxJ5gZR9c=
+  dependencies:
+    "@types/express" "*"
 
 "@types/prettier@^2.0.0":
   version "2.3.0"
@@ -4568,6 +4592,13 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/pascalcase/-/pascalcase-0.1.1.tgz"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
+
+passport-local@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/passport-local/download/passport-local-1.0.0.tgz#1fe63268c92e75606626437e3b906662c15ba6ee"
+  integrity sha1-H+YyaMkudWBmJkN+O5BmYsFbpu4=
+  dependencies:
+    passport-strategy "1.x.x"
 
 passport-strategy@1.x.x:
   version "1.0.0"
