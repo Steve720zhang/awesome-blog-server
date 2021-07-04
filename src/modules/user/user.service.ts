@@ -6,8 +6,9 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
 export type findUserConditions = {
-  username: string;
-  email: string;
+  username?: string;
+  email?: string;
+  password?: string;
 }
 
 @Injectable()
@@ -29,6 +30,7 @@ export class UserService {
   }
   
   findOneByConditions(userinfo: findUserConditions) {
+    console.log('userinfo:', userinfo)
     return this.articleRepository.findOne(userinfo);
   }
 
