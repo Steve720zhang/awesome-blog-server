@@ -12,6 +12,7 @@ import { DraftModule } from './modules/draft/draft.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
     ArticleTagModule,
     ArticleCommentModule,
     ArticleThumbModule,
-    DraftModule
+    DraftModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

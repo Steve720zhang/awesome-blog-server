@@ -1,8 +1,9 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request } from 'express';
+import { AuthGuard } from '@nestjs/passport';
 
-@Controller('api/v1')
+@Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -11,5 +12,11 @@ export class AppController {
     const headers = request.headers
     console.log('headers:', headers)
     return this.appService.getHello();
+  }
+
+  @UseGuards(AuthGuard('local'))
+  @Post('auth/login')
+  async login(@Req() req: Request) {
+    return req.user;
   }
 }
