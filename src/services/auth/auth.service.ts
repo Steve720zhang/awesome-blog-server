@@ -2,6 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { UserService, findUserConditions } from '../../modules/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 
+export type loginParams = {
+  username?: string,
+  email?: string,
+  phone?: string,
+  phonePrefix?: string,
+  password: string,
+}
+
 @Injectable()
 export class AuthService {
   constructor(
