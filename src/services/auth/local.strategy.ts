@@ -5,15 +5,13 @@ import { AuthService } from './auth.service';
 import { findUserConditions } from '../../modules/user/user.service';
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
+export class LocalStrategy extends PassportStrategy(Strategy, 'another') {
     constructor(private readonly authService: AuthService) {
         super();
     }
 
     async validate(userinfo: string, password: string): Promise<any> {
-        console.log('LocalStrategy: validate: => start:', userinfo, password)
         const user = await this.authService.validateUser(userinfo, password);
-        console.log('LocalStrategy: validate: => user:', user)
         if (!user) {
             return null;
         }

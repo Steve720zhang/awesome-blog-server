@@ -19,7 +19,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @UseGuards(LoginStrategy)
+  @UseGuards(AuthGuard('myjwt'))
   @Post('auth/login2')
   async loginAuth(@Req() req: Request) {
     console.log('result:', req.user)

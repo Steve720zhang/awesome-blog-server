@@ -1,21 +1,25 @@
 import { Strategy } from 'passport-local';
-import { PassportStrategy, AbstractStrategy } from '@nestjs/passport';
+import { AbstractStrategy, PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { findUserConditions } from '../../modules/user/user.service';
+import { ExtractJwt } from 'passport-jwt';
+import { LoginRequestParams } from 'src/types/login';
 
 @Injectable()
-export class LoginStrategy extends AbstractStrategy {
-    
-    async validate(data: any): Promise<any> {
-        console.log('LoginStrategy: validate:', data)
-        // console.log('LocalStrategy: validate: => start:', userinfo, password)
-        // const user = await this.authService.validateUser(userinfo, password);
-        // console.log('LocalStrategy: validate: => user:', user)
-        // if (!user) {
-        //     return null;
-        // }
-        // return user;
-        return null
+export class LoginStrategy extends PassportStrategy(Strategy, 'myjwt') {
+    constructor(private readonly authService: AuthService) {
+        super({
+            passReqToCallback: true,
+            usernameField: 'username',
+            passworkField: 'password',
+        })
+    }
+
+    async validate(payload: any, username: any, password: any, callback2: any): Promise<any> {
+        // console.log('LoginStrategy: validate payload:', Object.keys(payload), callback, callback1, callback2.toString())
+        const reqBody: LoginRequestParams = payload.body;
+        const validateResult = await this.authService.validateUserWhenLogin(reqBody)
+        return { accessToken: validateResult }
     }
 }

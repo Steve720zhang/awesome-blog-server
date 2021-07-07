@@ -1,26 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService, findUserConditions } from '../../modules/user/user.service';
 import { JwtService } from '@nestjs/jwt';
+import { LoginRequestParams } from 'src/types/login';
 
-export type loginParams = {
-  username?: string,
-  email?: string,
-  phone?: string,
-  phonePrefix?: string,
-  password: string,
-}
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UserService,
     private readonly jwtService: JwtService
-    ) {}
+  ) { }
 
+  async validateUserWhenLogin(payload: LoginRequestParams): Promise<any> {
+    const condition: any = { ...payload }
+    delete condition['password']
+    const user = await this.usersService.findOneByConditions(condition);
+    if (user && user.password === payload.password) {
+      return this.jwtService.sign(condition)
+    } else {
+      throw new UnauthorizedException()
+    }
+  }
   async validateUser(username: string, pass: string): Promise<any> {
-    console.log('validateUser:', username, pass)
-    const user = await this.usersService.findOneByConditions({username});
-    console.log('validateUser: user:', user)
+    const user = await this.usersService.findOneByConditions({ username });
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
