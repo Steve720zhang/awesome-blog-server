@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateArticleTagDto } from './dto/create-article-tag.dto';
 import { UpdateArticleTagDto } from './dto/update-article-tag.dto';
-import { ArticleTagRec } from './entities/article-tag-rec.entity';
+import { ArticleTagMapper } from './entities/article-tag-mapper.entity';
 import { ArticleTag } from './entities/article-tag.entity';
 
 @Injectable()
@@ -12,8 +12,8 @@ export class ArticleTagService {
     @InjectRepository(ArticleTag)
     private articleTagRepository: Repository<ArticleTag>,
 
-    @InjectRepository(ArticleTagRec)
-    private articleTagRecRepository: Repository<ArticleTagRec>
+    @InjectRepository(ArticleTagMapper)
+    private articleTagMapperRepository: Repository<ArticleTagMapper>
   ) {
 
   }

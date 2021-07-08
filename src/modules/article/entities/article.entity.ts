@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Index, CreateDateColumn } from "typeorm";
 
 @Entity('article')
 export class Article {
@@ -12,18 +12,16 @@ export class Article {
     content: string;
 
     @Column()
-    tag_ids: string;
-
-    @Column()
-    group_ids: string;
-
-    @Column()
     author: number;
 
-    @Column({ name: `create_time` })
+    @Column({ type: 'tinyint', default: 0 }) // 0: draft;1: normal_article;2:deleted
+    @Index('article_status_idx')
+    status: number;
+
+    @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
     createTime: Date;
 
-    @Column({ name: `update_time` })
+    @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
     updateTime: Date;
 
 

@@ -1,18 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, CreateDateColumn } from "typeorm";
+import { Entity, Index, Column, CreateDateColumn } from "typeorm";
 
-@Entity('article_group')
-export class ArticleGroup {
-    @PrimaryGeneratedColumn()
-    id: number;
+@Entity('article_group_mapper')
+export class ArticleGroupMapper {
 
-    @Column()
-    name: string;
+    @Column('article_id')
+    @Index('atm_ai_idx')
+    articleId: number;
 
-    @Column()
-    description: string;
+    @Column('article_group_id')
+    @Index('atm_ati_idx')
+    articleGroupId: string;
 
     @Column({ type: 'tinyint', default: 0 })
-    @Index('article_group_deleted_idx')
+    @Index('atm_deleted_idx')
     deleted: number;
 
     @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
@@ -20,7 +20,6 @@ export class ArticleGroup {
 
     @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
     updateTime: Date;
-
 
 
 }

@@ -1,21 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Index, CreateDateColumn } from "typeorm";
 
-@Entity(`article_tag`)
+@Entity('article_tag')
 export class ArticleTag {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ name: `tag_name` })
-    tagName: string;
+    @Column()
+    name: string;
 
-    @Column({ name: `description` })
+    @Column()
     description: string;
 
-    @Column({ name: `create_time` })
+    @Column({ type: 'tinyint', default: 0 })
+    @Index('article_tag_deleted_idx')
+    deleted: number;
+
+    @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
     createTime: Date;
 
-    @Column({ name: `update_time` })
+    @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
     updateTime: Date;
+
 
 
 }
