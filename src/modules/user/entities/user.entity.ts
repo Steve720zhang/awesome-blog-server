@@ -5,37 +5,37 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: false })
     @Index('user_username_idx')
     username: string;
 
-    @Column()
+    @Column({ nullable: false })
     nickname: string;
 
-    @Column()
+    @Column({ nullable: true })
     description: string;
 
-    @Column()
+    @Column({ nullable: false })
     password: string;
 
-    @Column()
+    @Column({ nullable: true })
     avatar: string;
 
-    @Column()
+    @Column({ nullable: false })
     role: number;
 
-    @Column()
+    @Column({ nullable: true })
     @Index('user_email_idx')
     email: string;
 
-    @Column()
+    @Column({ nullable: true })
     @Index('user_phone_idx')
     phone: string;
 
-    @Column({ name: 'phone_prefix' })
+    @Column({ name: 'phone_prefix', nullable: true })
     phonePrefix: string;
 
-    @Column()
+    @Column({ nullable: true })
     ip: string;
 
     @Column({ type: 'tinyint', default: 0 }) // 0 female;2=other
@@ -44,10 +44,12 @@ export class User {
     @Column({ nullable: false, default: '' })
     settings: string;
 
-    @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
+    @CreateDateColumn({ name: `create_time` })
     createTime: Date;
 
-    @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
+    @Column({ type: 'timestamp', name: `update_time`, nullable: false, default: () => 'CURRENT_TIMESTAMP()', onUpdate: 'CURRENT_TIMESTAMP' })
     updateTime: Date;
 
+    @Column({ default: '' })
+    context: string;
 }

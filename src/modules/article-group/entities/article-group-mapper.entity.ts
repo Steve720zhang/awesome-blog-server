@@ -1,13 +1,13 @@
-import { Entity, Column, Index, CreateDateColumn } from "typeorm";
+import { PrimaryColumn, Entity, Column, Index, CreateDateColumn } from "typeorm";
 
 @Entity('article_group_mapper')
 export class ArticleGroupMapper {
 
-    @Column('article_id')
+    @PrimaryColumn({ name: 'article_id' })
     @Index('agm_ai_idx')
     articleId: number;
 
-    @Column('article_group_id')
+    @Column({ name: 'article_group_id' })
     @Index('agm_agi_idx')
     articleGroupId: string;
 
@@ -15,11 +15,9 @@ export class ArticleGroupMapper {
     @Index('agm_deleted_idx')
     deleted: number;
 
-    @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
+    @CreateDateColumn({ name: `create_time` })
     createTime: Date;
 
-    @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
+    @Column({ type: 'timestamp', name: `update_time`, nullable: false, default: () => 'CURRENT_TIMESTAMP()', onUpdate: 'CURRENT_TIMESTAMP' })
     updateTime: Date;
-
-
 }

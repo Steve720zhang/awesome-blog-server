@@ -8,7 +8,6 @@ import { ArticleGroupModule } from './modules/article-group/article-group.module
 import { ArticleTagModule } from './modules/article-tag/article-tag.module';
 import { ArticleCommentModule } from './modules/article-comment/article-comment.module';
 import { ArticleThumbModule } from './modules/article-thumb/article-thumb.module';
-import { DraftModule } from './modules/draft/draft.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
@@ -34,7 +33,6 @@ import { AuthModule } from './services/auth/auth.module';
     ArticleTagModule,
     ArticleCommentModule,
     ArticleThumbModule,
-    DraftModule,
     AuthModule
   ],
   controllers: [AppController],

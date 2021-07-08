@@ -1,25 +1,23 @@
-import { Entity, Index, Column, CreateDateColumn } from "typeorm";
+import { PrimaryColumn, Entity, Index, Column, CreateDateColumn } from "typeorm";
 
-@Entity('article_group_mapper')
-export class ArticleGroupMapper {
+@Entity('article_tag_mapper')
+export class ArticleTagMapper {
 
-    @Column('article_id')
+    @PrimaryColumn({ name: 'article_id' })
     @Index('atm_ai_idx')
     articleId: number;
 
-    @Column('article_group_id')
+    @Column({ name: 'article_tag_id' })
     @Index('atm_ati_idx')
-    articleGroupId: string;
+    articleTagId: string;
 
     @Column({ type: 'tinyint', default: 0 })
     @Index('atm_deleted_idx')
     deleted: number;
 
-    @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
+    @CreateDateColumn({ name: `create_time` })
     createTime: Date;
 
-    @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
+    @Column({ type: 'timestamp', name: `update_time`, nullable: false, default: () => 'CURRENT_TIMESTAMP()', onUpdate: 'CURRENT_TIMESTAMP' })
     updateTime: Date;
-
-
 }

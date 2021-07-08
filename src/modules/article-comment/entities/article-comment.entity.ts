@@ -5,24 +5,22 @@ export class ArticleComment {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: false, default: '' })
     content: string;
 
-    @Column()
+    @Column({ nullable: true })
     author: string;
 
-    @Column()
+    @Column({ nullable: true })
     author_ip: string;
 
     @Column({ type: 'tinyint', default: 0 })
     @Index('article_comment_deleted_idx')
     deleted: number;
 
-    @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
+    @CreateDateColumn({ name: `create_time` })
     createTime: Date;
 
-    @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
+    @Column({ type: 'timestamp', name: `update_time`, nullable: false, default: () => 'CURRENT_TIMESTAMP()', onUpdate: 'CURRENT_TIMESTAMP' })
     updateTime: Date;
-
-
 }

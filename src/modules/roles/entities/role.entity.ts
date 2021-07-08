@@ -5,24 +5,23 @@ export class Role {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: true })
     title: string;
 
-    @Column()
+    @Column({ nullable: true })
     description: string;
 
-    @Column('sub_roles')
+    @Column({ name: 'sub_roles', nullable: true })
     subRoles: string;
 
     @Column({ type: 'tinyint', default: 0 })
     @Index('role_deleted_idx')
     deleted: number;
 
-    @CreateDateColumn({ name: `create_time`, nullable: false, default: () => "CURRENT_TIMESTAMP" })
+    @CreateDateColumn({ name: `create_time` })
     createTime: Date;
 
-    @CreateDateColumn({ name: `update_time`, nullable: false, default: () => "CURRENT_TIMESTAMP ON UPDATE" })
+    @Column({ type: 'timestamp', name: `update_time`, nullable: false, default: () => 'CURRENT_TIMESTAMP()', onUpdate: 'CURRENT_TIMESTAMP' })
     updateTime: Date;
-
 }
 
