@@ -11,28 +11,27 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) { }
 
+  verifyUser(token: string) {
+    if (token.startsWith('Bearer ')) {
+      token = token.replace('Bearer ', '')
+    }
+    return this.jwtService.verify(token)
+  }
+  
   async validateUserWhenLogin(payload: LoginRequestParams): Promise<any> {
     const condition: any = { ...payload }
     delete condition['password']
     const user = await this.usersService.findOneByConditions(condition);
     if (user && user.password === payload.password) {
-      return this.jwtService.sign(condition)
+      const jwtPayload = {
+        username: user.username,
+        nickname: user.nickname,
+        avatar: user.avatar || '',
+        role: user.role,
+      }
+      return this.jwtService.sign(jwtPayload)
     } else {
       throw new UnauthorizedException()
     }
-  }
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOneByConditions({ username });
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
-  }
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
   }
 }

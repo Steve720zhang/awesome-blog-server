@@ -33,7 +33,7 @@ import { AuthModule } from './services/auth/auth.module';
     ArticleTagModule,
     ArticleCommentModule,
     ArticleThumbModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { UserModule } from 'src/modules/user/user.module';
 import { AuthService } from './auth.service';
-import { LocalStrategy } from './local.strategy';
+import { AuthStrategy } from './auth.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './jwt.strategy';
 import { LoginStrategy } from './login.strategy';
+import { AuthGuard } from './auth.guard';
 
 @Module({
   imports: [
@@ -14,11 +14,11 @@ import { LoginStrategy } from './login.strategy';
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: {
-        expiresIn: '60s',
+        expiresIn: '7200s',
       }
     })
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy, LoginStrategy],
+  providers: [AuthService, AuthStrategy, LoginStrategy, AuthGuard],
   exports: [AuthService]
 })
 export class AuthModule { }

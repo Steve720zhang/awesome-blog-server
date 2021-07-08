@@ -7,7 +7,7 @@ import { ExtractJwt } from 'passport-jwt';
 import { LoginRequestParams } from 'src/types/login';
 
 @Injectable()
-export class LoginStrategy extends PassportStrategy(Strategy, 'myjwt') {
+export class LoginStrategy extends PassportStrategy(Strategy, 'login') {
     constructor(private readonly authService: AuthService) {
         super({
             passReqToCallback: true,
