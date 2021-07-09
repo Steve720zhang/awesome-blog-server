@@ -15,7 +15,7 @@ export class ArticleService {
   }
 
   create(createArticleDto: CreateArticleDto) {
-    return 'This action adds a new article';
+    return this.articleRepository.create(createArticleDto)
   }
 
   findAll() {
@@ -27,10 +27,10 @@ export class ArticleService {
   }
 
   update(id: number, updateArticleDto: UpdateArticleDto) {
-    return `This action updates a #${id} article`;
+    return this.articleRepository.update(id, updateArticleDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} article`;
+    return this.articleRepository.delete(id)
   }
 }
