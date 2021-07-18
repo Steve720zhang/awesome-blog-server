@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { ArticleTagService } from './article-tag.service';
 import { CreateArticleTagDto } from './dto/create-article-tag.dto';
 import { UpdateArticleTagDto } from './dto/update-article-tag.dto';
 
+@ApiTags('article-tag')
 @Controller('article-tag')
 export class ArticleTagController {
   constructor(private readonly articleTagService: ArticleTagService) {}

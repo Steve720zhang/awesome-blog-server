@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { ArticleThumbService } from './article-thumb.service';
 import { CreateArticleThumbDto } from './dto/create-article-thumb.dto';
 import { UpdateArticleThumbDto } from './dto/update-article-thumb.dto';
 
+@ApiTags('article-thumb')
 @Controller('article-thumb')
 export class ArticleThumbController {
   constructor(private readonly articleThumbService: ArticleThumbService) {}

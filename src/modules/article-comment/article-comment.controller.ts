@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { ArticleCommentService } from './article-comment.service';
 import { CreateArticleCommentDto } from './dto/create-article-comment.dto';
 import { UpdateArticleCommentDto } from './dto/update-article-comment.dto';
 
+@ApiTags('article-comment')
 @Controller('article-comment')
 export class ArticleCommentController {
   constructor(private readonly articleCommentService: ArticleCommentService) {}

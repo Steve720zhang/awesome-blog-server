@@ -7,8 +7,17 @@ import { AuthService } from './services/auth/auth.service';
 import { LoginStrategy } from './services/auth/login.strategy';
 import { Roles } from './services/auth/roles/roles.decorator';
 import { Roles as RolesEnum } from './services/auth/roles/roles.constant';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
-@Controller()
+
+
+@ApiTags('app')
+@Controller('app')
 export class AppController {
   constructor(
     private readonly appService: AppService,
@@ -16,14 +25,15 @@ export class AppController {
   ) { }
 
   @Get('hello')
+  @ApiOperation({ summary: 'test' })
   getHello(@Req() request: Request): string {
     const headers = request.headers
     console.log('headers:', headers)
     return this.appService.getHello();
   }
 
-  @UseGuards(AuthGuard('login'))
   @Post('auth/login')
+  @UseGuards(AuthGuard('login'))
   async loginAuth(@Req() req: Request) {
     console.log('result:', req.user)
     return req.user;
@@ -40,7 +50,8 @@ export class AppController {
   @UseGuards(myAuthGuard)
   @Get('profile2')
   getProfile2(@Req() req: Request) {
-    // console.log('profile:', req)
+    // console.log('profile:', req.user)
+    // console.log('Obj keys:', Object.keys(req))
     return req.user;
   }
 }
