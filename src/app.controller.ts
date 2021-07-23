@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthGuard as myAuthGuard } from './services/auth/auth.guard';
 import { AuthService } from './services/auth/auth.service';
@@ -34,8 +34,11 @@ export class AppController {
 
   @Post('auth/login')
   @UseGuards(AuthGuard('login'))
-  async loginAuth(@Req() req: Request) {
+  async loginAuth(@Req() req: Request, @Res({ passthrough: true }) response: Response) {
     console.log('result:', req.user)
+    if ((req.user as any ).accessToken) {
+      response?.cookie?.('token', `${(req.user as any ).accessToken}`)
+    }
     return req.user;
   }
 
