@@ -14,7 +14,7 @@
         "start:debug": "env-cmd -f .env.prd nest start --debug --watch",
         "start:prod": "env-cmd -f .env.prd pm2 start dist/main.js",
         "deply": "tyarn build && tyarn start:prod",
-        "dump": "env-cmd -f .env.prd node SQL_dumper.js",
+        "dump": "env-cmd -f .env.prd pm2 start SQL_dumper.js",
         "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "test": "jest",
         "test:watch": "jest --watch",
