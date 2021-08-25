@@ -8,6 +8,6 @@ schedule.scheduleJob('* 1 * * *', function() {
             password: process.env.DB_PWD,
             database: process.env.DB_SCHEMA,
         },
-        dumpToFile: `./dump-${new Date().toDateString()}.sql`,
+        dumpToFile: `./dump-${new Date().toUTCString()}.sql`,
     });
 });
