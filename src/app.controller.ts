@@ -42,12 +42,12 @@ export class AppController {
     return req.user;
   }
 
-  @UseGuards(AuthGuard('auth'))
-  @Get('profile')
-  getProfile(@Req() req: Request) {
-    // console.log('profile:', req)
-    return req.user;
-  }
+  // @UseGuards(AuthGuard('auth'))
+  // @Get('profile')
+  // getProfile(@Req() req: Request) {
+  //   // console.log('profile:', req)
+  //   return req.user;
+  // }
 
   @Roles(RolesEnum.Member)
   @UseGuards(myAuthGuard)
